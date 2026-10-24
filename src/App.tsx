@@ -19,8 +19,6 @@ type MarketAsset = {
   timestamp?: string
   sparkline?: number[]
   description?: string
-  metricLabel?: string
-  sector?: string
 }
 
 type NewsItem = {
@@ -33,53 +31,49 @@ type NewsItem = {
 }
 
 const stocks: MarketAsset[] = [
-  { id: 'aapl', name: 'Apple', symbol: 'AAPL', price: 214.82, change: 2.41, changePercent: 1.13, volume: '63.2M', marketCap: '3.2T', unit: 'USD', type: 'Equity', sector: 'Technology', sparkline: [188, 191, 198, 201, 196, 203, 210, 214], description: 'Consumer electronics and services leader.', metricLabel: 'Price' },
-  { id: 'msft', name: 'Microsoft', symbol: 'MSFT', price: 454.36, change: 5.62, changePercent: 1.25, volume: '26.1M', marketCap: '3.4T', unit: 'USD', type: 'Equity', sector: 'Software', sparkline: [420, 432, 438, 441, 446, 452, 454], description: 'Enterprise software and cloud computing platform.', metricLabel: 'Price' },
-  { id: 'nvda', name: 'NVIDIA', symbol: 'NVDA', price: 138.5, change: 5.18, changePercent: 3.89, volume: '58.4M', marketCap: '3.4T', unit: 'USD', type: 'Equity', sector: 'Semiconductors', sparkline: [110, 116, 119, 121, 126, 131, 138], description: 'AI-focused semiconductor and GPU manufacturer.', metricLabel: 'Price' },
-  { id: 'amzn', name: 'Amazon', symbol: 'AMZN', price: 187.14, change: -1.84, changePercent: -0.97, volume: '41.1M', marketCap: '1.97T', unit: 'USD', type: 'Equity', sector: 'Consumer retail', sparkline: [198, 195, 191, 194, 189, 188, 187], description: 'Global retail and cloud infrastructure business.', metricLabel: 'Price' },
-  { id: 'googl', name: 'Alphabet', symbol: 'GOOGL', price: 176.28, change: 2.1, changePercent: 1.21, volume: '18.8M', marketCap: '2.17T', unit: 'USD', type: 'Equity', sector: 'Internet services', sparkline: [160, 164, 168, 170, 172, 175, 176], description: 'Digital advertising and cloud platform company.', metricLabel: 'Price' },
-  { id: 'tsla', name: 'Tesla', symbol: 'TSLA', price: 251.8, change: -7.64, changePercent: -2.94, volume: '96.7M', marketCap: '805B', unit: 'USD', type: 'Equity', sector: 'Automotive', sparkline: [272, 268, 263, 260, 257, 255, 251], description: 'Electric vehicle and energy storage manufacturer.', metricLabel: 'Price' },
-  { id: 'meta', name: 'Meta Platforms', symbol: 'META', price: 525.94, change: 11.42, changePercent: 2.21, volume: '17.5M', marketCap: '1.33T', unit: 'USD', type: 'Equity', sector: 'Internet services', sparkline: [470, 485, 492, 501, 510, 520, 525], description: 'Social media and digital advertising company.', metricLabel: 'Price' },
-  { id: 'brk-b', name: 'Berkshire Hathaway', symbol: 'BRK-B', price: 432.6, change: 5.9, changePercent: 1.38, volume: '6.5M', marketCap: '938B', unit: 'USD', type: 'Equity', sector: 'Diversified', sparkline: [405, 415, 420, 425, 428, 432, 432], description: 'Conglomerate with insurance, rail, and energy exposure.', metricLabel: 'Price' },
+  { id: 'aapl', name: 'Apple', symbol: 'AAPL', price: 214.82, change: 2.41, changePercent: 1.13, volume: '63.2M', marketCap: '3.2T', unit: 'USD', type: 'Equity', sector: 'Technology', sparkline: [60, 62, 63, 68, 70, 72, 74, 76, 77, 79], description: 'Apple trades on durable demand and margin expansion as the hardware and services mix remains robust.' },
+  { id: 'msft', name: 'Microsoft', symbol: 'MSFT', price: 454.36, change: 5.62, changePercent: 1.25, volume: '26.1M', marketCap: '3.4T', unit: 'USD', type: 'Equity', sector: 'Software', sparkline: [430, 438, 442, 445, 446, 450, 453, 454, 454.5], description: 'Microsoft remains a relative strength story in enterprise software and AI infrastructure spending.' },
+  { id: 'nvda', name: 'NVIDIA', symbol: 'NVDA', price: 138.5, change: 5.18, changePercent: 3.89, volume: '58.4M', marketCap: '3.4T', unit: 'USD', type: 'Equity', sector: 'Semiconductors', sparkline: [116, 119, 120, 124, 128, 130, 136, 138], description: 'NVIDIA continues to benefit from large AI compute demand and improving supply-chain execution.' },
 ]
 
 const bonds: MarketAsset[] = [
-  { id: 'us-10y', name: 'US Treasury 10Y', symbol: 'US10Y', price: 4.21, change: 0.07, changePercent: 1.69, unit: '%', type: 'Government yield benchmark', issuer: 'U.S. Treasury', maturity: '10Y', currency: 'USD', timestamp: '11:45 ET', sparkline: [3.8, 3.9, 4.1, 4.12, 4.16, 4.18, 4.21], description: 'Benchmark government bond yield used in pricing long-duration debt.', metricLabel: 'Yield' },
-  { id: 'us-2y', name: 'US Treasury 2Y', symbol: 'US2Y', price: 4.08, change: 0.04, changePercent: 0.98, unit: '%', type: 'Government yield benchmark', issuer: 'U.S. Treasury', maturity: '2Y', currency: 'USD', timestamp: '11:45 ET', sparkline: [3.7, 3.8, 3.93, 3.96, 4.01, 4.05, 4.08], description: 'Front-end yield curve signal for policy expectations.', metricLabel: 'Yield' },
-  { id: 'us-30y', name: 'US Treasury 30Y', symbol: 'US30Y', price: 4.55, change: 0.08, changePercent: 1.79, unit: '%', type: 'Government yield benchmark', issuer: 'U.S. Treasury', maturity: '30Y', currency: 'USD', timestamp: '11:45 ET', sparkline: [4.2, 4.23, 4.31, 4.4, 4.48, 4.53, 4.55], description: 'Long bond benchmark for mortgage and credit pricing.', metricLabel: 'Yield' },
-  { id: 'gld-bond', name: 'Global Bond Fund', symbol: 'BND', price: 72.18, change: 0.26, changePercent: 0.36, unit: 'USD', type: 'Bond fund', issuer: 'iShares', maturity: 'Broad market', currency: 'USD', timestamp: '11:45 ET', sparkline: [71.4, 71.6, 71.9, 72.1, 72.2, 72.3, 72.18], description: 'Broad government and corporate bond fund exposure.', metricLabel: 'Price' },
-  { id: 'jpn-10y', name: 'Japan 10Y Govt Bond', symbol: 'JP10Y', price: 1.09, change: -0.02, changePercent: -1.81, unit: '%', type: 'Country benchmark', issuer: 'Japan Ministry of Finance', maturity: '10Y', currency: 'JPY', timestamp: '11:45 ET', sparkline: [1.34, 1.28, 1.19, 1.18, 1.15, 1.11, 1.09], description: 'Japanese yield benchmark for global fixed income investors.', metricLabel: 'Yield' },
-  { id: 'ger-10y', name: 'Germany 10Y Bund', symbol: 'DE10Y', price: 2.79, change: 0.05, changePercent: 1.82, unit: '%', type: 'Country benchmark', issuer: 'Germany', maturity: '10Y', currency: 'EUR', timestamp: '11:45 ET', sparkline: [2.46, 2.52, 2.61, 2.7, 2.75, 2.78, 2.79], description: 'European core sovereign yield referencing inflation expectations.', metricLabel: 'Yield' },
+  { id: 'us-10y', name: 'US Treasury 10Y', symbol: 'US10Y', price: 4.21, change: 0.07, changePercent: 1.69, unit: '%', type: 'Government yield benchmark', issuer: 'U.S. Treasury', maturity: '10Y', currency: 'USD', timestamp: '4:00 PM ET', sparkline: [3.8, 3.9, 3.95, 4.05, 4.08, 4.14, 4.2], description: 'The 10-year Treasury remains sensitive to rate expectations and growth momentum.' },
+  { id: 'us-2y', name: 'US Treasury 2Y', symbol: 'US2Y', price: 4.08, change: 0.04, changePercent: 0.98, unit: '%', type: 'Government yield benchmark', issuer: 'U.S. Treasury', maturity: '2Y', currency: 'USD', timestamp: '4:00 PM ET', sparkline: [3.9, 3.95, 3.97, 4.01, 4.04, 4.08], description: 'The Treasury curve continues to reflect near-term policy and liquidity expectations.' },
+  { id: 'ger-10y', name: 'Germany 10Y Bund', symbol: 'DE10Y', price: 2.79, change: 0.05, changePercent: 1.82, unit: '%', type: 'Country benchmark', issuer: 'Germany', maturity: '10Y', currency: 'EUR', timestamp: '5:00 PM CET', sparkline: [2.55, 2.58, 2.61, 2.7, 2.74, 2.79], description: 'Bund yields remain quiet but firm as investors weigh growth and policy expectations.' },
 ]
 
 const crypto: MarketAsset[] = [
-  { id: 'btc', name: 'Bitcoin', symbol: 'BTC', price: 64212.4, change: 1188.5, changePercent: 1.89, volume: '$29.8B', marketCap: '$1.27T', unit: 'USD', type: 'Cryptocurrency', currency: 'USD', sparkline: [61000, 61800, 62100, 62900, 63200, 63890, 64212], description: 'Largest digital asset by market capitalization.', metricLabel: 'Price' },
-  { id: 'eth', name: 'Ethereum', symbol: 'ETH', price: 3526.12, change: 91.2, changePercent: 2.65, volume: '$14.7B', marketCap: '$423B', unit: 'USD', type: 'Cryptocurrency', currency: 'USD', sparkline: [3310, 3350, 3385, 3420, 3460, 3498, 3526], description: 'Smart contract platform powering decentralized apps.', metricLabel: 'Price' },
-  { id: 'sol', name: 'Solana', symbol: 'SOL', price: 162.88, change: 7.42, changePercent: 4.78, volume: '$4.3B', marketCap: '$74.1B', unit: 'USD', type: 'Cryptocurrency', currency: 'USD', sparkline: [140, 148, 151, 155, 158, 160, 162], description: 'High-throughput blockchain with rapid transaction settlement.', metricLabel: 'Price' },
-  { id: 'xrp', name: 'XRP', symbol: 'XRP', price: 0.62, change: 0.02, changePercent: 3.33, volume: '$2.2B', marketCap: '$35.8B', unit: 'USD', type: 'Cryptocurrency', currency: 'USD', sparkline: [0.52, 0.54, 0.56, 0.58, 0.6, 0.61, 0.62], description: 'Cross-border payment asset with strong liquidity.', metricLabel: 'Price' },
-  { id: 'ada', name: 'Cardano', symbol: 'ADA', price: 0.72, change: 0.03, changePercent: 4.32, volume: '$1.1B', marketCap: '$25.8B', unit: 'USD', type: 'Cryptocurrency', currency: 'USD', sparkline: [0.58, 0.61, 0.64, 0.68, 0.7, 0.71, 0.72], description: 'Proof-of-stake blockchain focused on decentralized finance.', metricLabel: 'Price' },
+  { id: 'btc', name: 'Bitcoin', symbol: 'BTC', price: 64212.4, change: 1188.5, changePercent: 1.89, volume: '$29.8B', marketCap: '$1.27T', unit: 'USD', type: 'Cryptocurrency', currency: 'USD', sparkline: [58600, 59500, 60500, 61000, 62000, 62850, 63200, 64212], description: 'Bitcoin remains supported by large-cap demand and resilient spot-market flows.' },
+  { id: 'eth', name: 'Ethereum', symbol: 'ETH', price: 3526.12, change: 91.2, changePercent: 2.65, volume: '$14.7B', marketCap: '$423B', unit: 'USD', type: 'Cryptocurrency', currency: 'USD', sparkline: [3080, 3160, 3240, 3330, 3400, 3460, 3526], description: 'Ethereum keeps trading with strong institutional interest and robust network activity.' },
+  { id: 'sol', name: 'Solana', symbol: 'SOL', price: 162.88, change: 7.42, changePercent: 4.78, volume: '$4.3B', marketCap: '$74.1B', unit: 'USD', type: 'Cryptocurrency', currency: 'USD', sparkline: [145, 149, 152, 154, 157, 160, 162.88], description: 'Solana is benefiting from stronger on-chain activity and improving network utilization.' },
 ]
 
 const indices: MarketAsset[] = [
-  { id: 'spx', name: 'S&P 500', symbol: 'SPX', price: 5521.34, change: 32.45, changePercent: 0.59, unit: 'points', type: 'Index', currency: 'USD', sparkline: [5380, 5404, 5435, 5472, 5490, 5510, 5521], description: 'Broad U.S. large-cap equity benchmark.', metricLabel: 'Value' },
-  { id: 'ndx', name: 'Nasdaq Composite', symbol: 'IXIC', price: 19642.1, change: 211.8, changePercent: 1.09, unit: 'points', type: 'Index', currency: 'USD', sparkline: [18840, 19020, 19150, 19380, 19480, 19580, 19642], description: 'Technology-heavy U.S. index.', metricLabel: 'Value' },
-  { id: 'djia', name: 'Dow Jones Industrial Average', symbol: 'DJI', price: 40114.2, change: 144.6, changePercent: 0.36, unit: 'points', type: 'Index', currency: 'USD', sparkline: [39510, 39680, 39840, 39960, 40020, 40090, 40114], description: 'Blue-chip industrial benchmark.', metricLabel: 'Value' },
-  { id: 'ftse', name: 'FTSE 100', symbol: 'FTSE', price: 8314.8, change: -18.4, changePercent: -0.22, unit: 'points', type: 'Index', currency: 'GBP', sparkline: [8390, 8388, 8366, 8338, 8322, 8318, 8314], description: 'Major UK equity benchmark.', metricLabel: 'Value' },
+  { id: 'spx', name: 'S&P 500', symbol: 'SPX', price: 5521.34, change: 32.45, changePercent: 0.59, unit: 'points', type: 'Index', currency: 'USD', sparkline: [5330, 5380, 5410, 5440, 5475, 5502, 5521.34], description: 'Index strength remains broad-based, with large-cap names supporting a constructive tape.' },
+  { id: 'ndx', name: 'Nasdaq Composite', symbol: 'IXIC', price: 19642.1, change: 211.8, changePercent: 1.09, unit: 'points', type: 'Index', currency: 'USD', sparkline: [18840, 18980, 19130, 19310, 19450, 19620, 19642.1], description: 'The Nasdaq continues to lead as growth catalysts and AI-related demand remain strong.' },
+  { id: 'djia', name: 'Dow Jones Industrial Average', symbol: 'DJI', price: 40114.2, change: 144.6, changePercent: 0.36, unit: 'points', type: 'Index', currency: 'USD', sparkline: [39440, 39680, 39820, 39980, 40080, 40114.2], description: 'Dow breadth has improved but remains more measured than the higher-beta index peers.' },
 ]
 
 const commodities: MarketAsset[] = [
-  { id: 'gold', name: 'Gold', symbol: 'XAU/USD', price: 2048.7, change: 11.4, changePercent: 0.56, unit: 'USD/oz', type: 'Commodity', currency: 'USD', volume: 'N/A', sparkline: [2004, 2012, 2021, 2028, 2038, 2041, 2048], description: 'Precious metal priced per troy ounce.', metricLabel: 'Price' },
-  { id: 'silver', name: 'Silver', symbol: 'XAG/USD', price: 24.58, change: 0.31, changePercent: 1.28, unit: 'USD/oz', type: 'Commodity', currency: 'USD', volume: 'N/A', sparkline: [23.2, 23.5, 23.9, 24.1, 24.28, 24.42, 24.58], description: 'Industrial and precious metal consumption exposure.', metricLabel: 'Price' },
-  { id: 'crude', name: 'WTI Crude', symbol: 'CL', price: 73.42, change: -1.08, changePercent: -1.45, unit: 'USD/bbl', type: 'Commodity', currency: 'USD', volume: 'N/A', sparkline: [77.1, 76.6, 75.8, 75.5, 74.9, 74.1, 73.42], description: 'Benchmark crude oil pricing for U.S. benchmark.', metricLabel: 'Price' },
-  { id: 'natgas', name: 'Natural Gas', symbol: 'NG', price: 3.12, change: 0.09, changePercent: 2.97, unit: 'USD/MMBtu', type: 'Commodity', currency: 'USD', volume: 'N/A', sparkline: [2.66, 2.7, 2.88, 2.94, 3.02, 3.08, 3.12], description: 'Energy commodity sensitive to weather and inventory data.', metricLabel: 'Price' },
+  { id: 'gold', name: 'Gold', symbol: 'XAU/USD', price: 2048.7, change: 11.4, changePercent: 0.56, unit: 'USD/oz', type: 'Commodity', currency: 'USD', volume: 'N/A', sparkline: [1980, 1994, 2010, 2022, 2030, 2048.7], description: 'Gold remains supported by softer real yields and defensive positioning.' },
+  { id: 'silver', name: 'Silver', symbol: 'XAG/USD', price: 24.58, change: 0.31, changePercent: 1.28, unit: 'USD/oz', type: 'Commodity', currency: 'USD', volume: 'N/A', sparkline: [23.1, 23.35, 23.8, 24.1, 24.45, 24.58], description: 'Silver is holding up as a higher-beta inflation and industrial metals proxy.' },
+  { id: 'crude', name: 'WTI Crude', symbol: 'CL', price: 73.42, change: -1.08, changePercent: -1.45, unit: 'USD/bbl', type: 'Commodity', currency: 'USD', volume: 'N/A', sparkline: [76.4, 76.1, 75.8, 75.2, 74.3, 73.42], description: 'Crude is giving back gains as supply concerns ease and market attention shifts to demand.' },
 ]
 
 const forex: MarketAsset[] = [
-  { id: 'eurusd', name: 'EUR/USD', symbol: 'EURUSD', price: 1.0842, change: 0.0018, changePercent: 0.17, unit: 'rate', type: 'Pair', currency: 'USD', sparkline: [1.078, 1.079, 1.081, 1.082, 1.083, 1.0837, 1.0842], description: 'Euro against U.S. dollar benchmark pair.', metricLabel: 'Rate' },
-  { id: 'gbpusd', name: 'GBP/USD', symbol: 'GBPUSD', price: 1.2708, change: -0.0024, changePercent: -0.19, unit: 'rate', type: 'Pair', currency: 'USD', sparkline: [1.281, 1.279, 1.276, 1.274, 1.273, 1.272, 1.2708], description: 'British pound against U.S. dollar pair.', metricLabel: 'Rate' },
-  { id: 'usdjpy', name: 'USD/JPY', symbol: 'USDJPY', price: 149.62, change: 0.34, changePercent: 0.23, unit: 'rate', type: 'Pair', currency: 'JPY', sparkline: [148.7, 148.9, 149.1, 149.18, 149.3, 149.52, 149.62], description: 'U.S. dollar against Japanese yen pair.', metricLabel: 'Rate' },
-  { id: 'usdcad', name: 'USD/CAD', symbol: 'USDCAD', price: 1.3641, change: -0.0047, changePercent: -0.34, unit: 'rate', type: 'Pair', currency: 'CAD', sparkline: [1.37, 1.369, 1.3675, 1.3668, 1.3653, 1.3648, 1.3641], description: 'U.S. dollar against Canadian dollar pair.', metricLabel: 'Rate' },
+  { id: 'eurusd', name: 'EUR/USD', symbol: 'EURUSD', price: 1.0842, change: 0.0018, changePercent: 0.17, unit: 'rate', type: 'Pair', currency: 'USD', sparkline: [1.078, 1.079, 1.081, 1.082, 1.0833, 1.0842], description: 'The euro is gradually firming as rate expectations remain supportive.' },
+  { id: 'gbpusd', name: 'GBP/USD', symbol: 'GBPUSD', price: 1.2708, change: -0.0024, changePercent: -0.19, unit: 'rate', type: 'Pair', currency: 'USD', sparkline: [1.282, 1.280, 1.278, 1.275, 1.273, 1.2708], description: 'Sterling is softer as growth concerns offset the stronger policy narrative.' },
+  { id: 'usdjpy', name: 'USD/JPY', symbol: 'USDJPY', price: 149.62, change: 0.34, changePercent: 0.23, unit: 'rate', type: 'Pair', currency: 'JPY', sparkline: [148.7, 148.9, 149.1, 149.22, 149.45, 149.62], description: 'The yen remains volatile while global rates and risk sentiment shape the pair.' },
 ]
+
+const categoryMap = {
+  stocks,
+  bonds,
+  crypto,
+  indices,
+  commodities,
+  forex,
+} as const
 
 const marketOverview = [
   { name: 'S&P 500', symbol: 'SPX', type: 'Index', value: '5,521.34', unit: 'points', change: '+0.59%' },
@@ -96,7 +90,6 @@ const newsItems: NewsItem[] = [
   { id: 'n2', headline: 'Treasury yields hold firm as investors weigh inflation and policy expectations', publisher: 'Capital Journal', time: '34 minutes ago', market: 'Rates', url: 'https://example.com/news/2' },
   { id: 'n3', headline: 'Oil slips as supply outlook improves while demand remains uneven', publisher: 'Energy Desk', time: '1 hour ago', market: 'Commodities', url: 'https://example.com/news/3' },
   { id: 'n4', headline: 'Euro extends gains as growth outlook firmed by stronger external demand', publisher: 'FX Daily', time: '2 hours ago', market: 'Forex', url: 'https://example.com/news/4' },
-  { id: 'n5', headline: 'Crypto market gains breadth as large-cap tokens recover from early-session volatility', publisher: 'Block Report', time: '3 hours ago', market: 'Crypto', url: 'https://example.com/news/5' },
 ]
 
 const watchlist = [
@@ -106,15 +99,6 @@ const watchlist = [
   { id: 'us-10y', name: 'US 10Y Treasury', symbol: 'US10Y', price: 4.21, change: 0.07, changePercent: 1.69 },
   { id: 'gold', name: 'Gold', symbol: 'XAU/USD', price: 2048.7, change: 11.4, changePercent: 0.56 },
 ]
-
-const categoryMap = {
-  stocks,
-  bonds,
-  crypto,
-  indices,
-  commodities,
-  forex,
-} as const
 
 const marketCategories = [
   { title: 'Stocks', path: '/markets/stocks', count: stocks.length },
@@ -126,6 +110,10 @@ const marketCategories = [
 ]
 
 const allAssets = [...stocks, ...bonds, ...crypto, ...indices, ...commodities, ...forex]
+
+function assetRouteSymbol(symbol: string) {
+  return encodeURIComponent(symbol.toLowerCase())
+}
 
 function App() {
   return (
@@ -193,13 +181,13 @@ function formatPrice(value: number, unit?: string) {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
-      maximumFractionDigits: unit === 'USD' ? 2 : 2,
+      maximumFractionDigits: 2,
     }).format(value)
   }
   if (unit === 'rate') {
     return value.toFixed(4)
   }
-  if (typeof value === 'number' && Math.abs(value) >= 1000) {
+  if (Math.abs(value) >= 1000) {
     return value.toLocaleString(undefined, { maximumFractionDigits: 2 })
   }
   return value.toFixed(2)
@@ -220,15 +208,13 @@ function formatSparkline(values: number[]) {
   const max = Math.max(...values)
   const range = max - min || 1
 
-  const points = values
+  return values
     .map((value, index) => {
       const x = (index / (values.length - 1)) * 100
       const y = 100 - ((value - min) / range) * 100
       return `${x},${y}`
     })
     .join(' ')
-
-  return points
 }
 
 function PageHeader({ title, description }: { title: string; description: string }) {
@@ -286,46 +272,13 @@ function HomePage() {
             <tbody>
               {stocks.slice(0, 5).map((stock) => (
                 <tr key={stock.id}>
-                  <td><Link to={`/analysis/${stock.symbol.toLowerCase()}`}>{stock.name}</Link></td>
+                  <td><Link to={`/analysis/${assetRouteSymbol(stock.symbol)}`}>{stock.name}</Link></td>
                   <td>{stock.symbol}</td>
                   <td>{formatPrice(stock.price, stock.unit)}</td>
                   <td className={stock.change >= 0 ? 'positive' : 'negative'}>{formatSigned(stock.change, 2)}</td>
                   <td className={stock.changePercent >= 0 ? 'positive' : 'negative'}>{formatPercent(stock.changePercent)}</td>
                   <td>{stock.volume}</td>
                   <td>{stock.marketCap}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <section className="content-section">
-        <div className="section-header">
-          <h2>Bonds</h2>
-          <Link to="/markets/bonds">View All Bonds</Link>
-        </div>
-        <div className="asset-table-wrap">
-          <table className="asset-table">
-            <thead>
-              <tr>
-                <th>Instrument</th>
-                <th>Type</th>
-                <th>Yield</th>
-                <th>Yield change</th>
-                <th>Currency</th>
-                <th>Timestamp</th>
-              </tr>
-            </thead>
-            <tbody>
-              {bonds.slice(0, 5).map((bond) => (
-                <tr key={bond.id}>
-                  <td>{bond.name}</td>
-                  <td>{bond.type}</td>
-                  <td>{formatPrice(bond.price, bond.unit)}</td>
-                  <td className={bond.change >= 0 ? 'positive' : 'negative'}>{formatSigned(bond.change, 2)}</td>
-                  <td>{bond.currency}</td>
-                  <td>{bond.timestamp}</td>
                 </tr>
               ))}
             </tbody>
@@ -365,56 +318,6 @@ function HomePage() {
               ))}
             </tbody>
           </table>
-        </div>
-      </section>
-
-      <section className="content-section">
-        <div className="section-header">
-          <h2>Indices, commodities and forex</h2>
-        </div>
-        <div className="compact-grid">
-          <div className="mini-table-card">
-            <h3>Indices</h3>
-            <table className="asset-table">
-              <tbody>
-                {indices.slice(0, 3).map((item) => (
-                  <tr key={item.id}>
-                    <td>{item.name}</td>
-                    <td>{formatPrice(item.price, item.unit)}</td>
-                    <td className={item.changePercent >= 0 ? 'positive' : 'negative'}>{formatPercent(item.changePercent)}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <div className="mini-table-card">
-            <h3>Commodities</h3>
-            <table className="asset-table">
-              <tbody>
-                {commodities.slice(0, 3).map((item) => (
-                  <tr key={item.id}>
-                    <td>{item.name}</td>
-                    <td>{formatPrice(item.price, item.unit)}</td>
-                    <td className={item.changePercent >= 0 ? 'positive' : 'negative'}>{formatPercent(item.changePercent)}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <div className="mini-table-card">
-            <h3>Forex</h3>
-            <table className="asset-table">
-              <tbody>
-                {forex.slice(0, 3).map((item) => (
-                  <tr key={item.id}>
-                    <td>{item.name}</td>
-                    <td>{formatPrice(item.price, item.unit)}</td>
-                    <td className={item.changePercent >= 0 ? 'positive' : 'negative'}>{formatPercent(item.changePercent)}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
         </div>
       </section>
 
@@ -498,7 +401,7 @@ function MarketCategoryPage() {
 
   useEffect(() => {
     setLoading(true)
-    const timer = window.setTimeout(() => setLoading(false), 220)
+    const timer = window.setTimeout(() => setLoading(false), 180)
     return () => window.clearTimeout(timer)
   }, [category])
 
@@ -507,17 +410,17 @@ function MarketCategoryPage() {
   }, [search, sortBy, category])
 
   const filteredAssets = useMemo(() => {
-    const searchValue = search.trim().toLowerCase()
+    const query = search.trim().toLowerCase()
     const filtered = assetData.filter((asset) => {
-      if (!searchValue) return true
+      if (!query) return true
       return [asset.name, asset.symbol, asset.issuer ?? '', asset.currency ?? '', asset.type ?? '']
         .join(' ')
         .toLowerCase()
-        .includes(searchValue)
+        .includes(query)
     })
 
-    const sorted = [...filtered]
-    sorted.sort((a, b) => {
+    const next = [...filtered]
+    next.sort((a, b) => {
       if (sortBy === 'price') return b.price - a.price
       if (sortBy === 'change') return b.change - a.change
       if (sortBy === 'volume') {
@@ -526,14 +429,12 @@ function MarketCategoryPage() {
         return bVolume - aVolume
       }
       if (sortBy === 'marketCap') {
-        const aCap = parseMarketCap(a.marketCap ?? '0')
-        const bCap = parseMarketCap(b.marketCap ?? '0')
-        return bCap - aCap
+        return parseMarketCap(b.marketCap ?? '0') - parseMarketCap(a.marketCap ?? '0')
       }
       return b.changePercent - a.changePercent
     })
 
-    return sorted
+    return next
   }, [assetData, search, sortBy])
 
   const pageSize = 8
@@ -601,7 +502,11 @@ function MarketCategoryPage() {
               <tbody>
                 {visibleAssets.map((asset) => (
                   <tr key={asset.id}>
-                    <td><Link to={categoryKey === 'stocks' || categoryKey === 'crypto' ? `/analysis/${asset.symbol.toLowerCase()}` : `/charts/${asset.symbol.toLowerCase()}`}>{asset.name}</Link></td>
+                    <td>
+                      <Link to={categoryKey === 'stocks' || categoryKey === 'crypto' ? `/analysis/${assetRouteSymbol(asset.symbol)}` : `/charts/${assetRouteSymbol(asset.symbol)}`}>
+                        {asset.name}
+                      </Link>
+                    </td>
                     <td>{asset.symbol}</td>
                     <td>{formatPrice(asset.price, asset.unit)}</td>
                     <td className={asset.change >= 0 ? 'positive' : 'negative'}>{formatSigned(asset.change, 2)}</td>
@@ -665,7 +570,7 @@ function ChartsPage() {
       <PageHeader title="Charts" description="Monitor sector leadership, trend behavior, and market structure across asset classes." />
       <div className="chart-grid">
         {allAssets.slice(0, 8).map((asset) => (
-          <Link key={asset.id} to={`/charts/${asset.symbol.toLowerCase()}`} className="chart-card">
+          <Link key={asset.id} to={`/charts/${assetRouteSymbol(asset.symbol)}`} className="chart-card">
             <div className="chart-header-line">
               <div>
                 <span className="chart-symbol">{asset.symbol}</span>
@@ -689,7 +594,8 @@ function ChartsPage() {
 
 function ChartDetailPage() {
   const { symbol } = useParams()
-  const asset = allAssets.find((item) => item.symbol.toLowerCase() === symbol?.toLowerCase())
+  const lookupSymbol = symbol ? symbol.toLowerCase() : ''
+  const asset = allAssets.find((item) => item.symbol.toLowerCase() === lookupSymbol)
 
   if (!asset) {
     return <NotFoundPage />
@@ -773,7 +679,7 @@ function AnalysisPage() {
             <p>
               {asset.name} remains {asset.changePercent >= 0 ? 'supported by' : 'under pressure from'} broad market flow and sector-level positioning.
             </p>
-            <Link to={`/analysis/${asset.symbol.toLowerCase()}`}>Open Analysis</Link>
+            <Link to={`/analysis/${assetRouteSymbol(asset.symbol)}`}>Open Analysis</Link>
           </article>
         ))}
       </div>
@@ -783,7 +689,8 @@ function AnalysisPage() {
 
 function AnalysisDetailPage() {
   const { symbol } = useParams()
-  const asset = allAssets.find((item) => item.symbol.toLowerCase() === symbol?.toLowerCase())
+  const lookupSymbol = symbol ? symbol.toLowerCase() : ''
+  const asset = allAssets.find((item) => item.symbol.toLowerCase() === lookupSymbol)
 
   if (!asset) {
     return <NotFoundPage />
@@ -806,13 +713,13 @@ function AnalysisDetailPage() {
 
         <div className="analysis-copy">
           <p>
-            {asset.name} is showing a {asset.changePercent >= 0 ? 'constructive' : 'defensive'} setup, with momentum aligned to the broader market backdrop and a directional bias shaped by recent {asset.type ? asset.type.toLowerCase() : 'asset'} flow.
+            {asset.name} is showing a {asset.changePercent >= 0 ? 'constructive' : 'defensive'} setup, with momentum aligned to the broader market backdrop and a directional bias shaped by recent price action.
           </p>
           <p>
-            Key drivers include price support, liquidity conditions, and relative strength versus comparable instruments. Traders are monitoring the current {asset.symbol} range for continuation signals while keeping an eye on macro catalysts and market breadth.
+            Key drivers include liquidity conditions, relative performance versus comparable instruments, and technical support around the current range. Traders are monitoring the {asset.symbol} level for continuation or exhaustion.
           </p>
           <p>
-            The tactical view remains {asset.changePercent >= 0 ? 'favorable for continuation' : 'cautious with protection on downside'} unless the market loses the short-term support structure around current levels.
+            The tactical view remains {asset.changePercent >= 0 ? 'favorable for continuation' : 'cautious with protection on downside'} unless market structure breaks below the most recent support area.
           </p>
         </div>
       </section>
